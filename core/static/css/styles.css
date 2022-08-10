@@ -1,0 +1,8 @@
+a {
+  color: #000
+}
+
+a:hover {
+  text-decoration: none;
+  color: rgb(159, 163, 162);
+}

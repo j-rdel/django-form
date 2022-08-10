@@ -1,0 +1,56 @@
+{% load bootstrap4 %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% bootstrap_css %}
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <title>Index</title>
+</head>
+<body>
+  <div class="container">
+    <h1>Products</h1>
+
+    <table class="tables table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Product</th>
+          <th scope="col">Price</th>
+          <th scope="col">Inventory</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for product in products %}
+          <tr>
+            <td scope="row">{{product.id}}</td>
+            <td scope="row"><a href="#modal{{product.id}}" data-toggle="modal">{{product.name}}</a></td>
+            <td scope="row">{{product.price}}</td>
+            <td scope="row">{{product.inventory}}</td>
+          </tr>
+
+          <div class="modal fade bd-example-modal-lg show" id="modal{{product.id}}" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body" id="dynamic-content">
+                  <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid" />
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+{% bootstrap_javascript jquery='full' %}
+</body>
+</html>
